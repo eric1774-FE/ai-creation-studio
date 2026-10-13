@@ -1,0 +1,7 @@
+interface:
+  display_name: "小说爆款短剧改编"
+  short_description: "提取爆款点并把小说改编为可拍摄、可投流的分集短剧剧本"
+  default_prompt: "使用 $story-script 分析这篇小说的爆款点，并按完整流程改编为分集短剧剧本。"
+
+policy:
+  allow_implicit_invocation: true

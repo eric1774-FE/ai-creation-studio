@@ -1,0 +1,4 @@
+interface:
+  display_name: "故事提示词 HTML 报告"
+  short_description: "校验双语 V2，生成分类清晰的离线 HTML 报告"
+  default_prompt: "使用 $story-prompt-report-renderer 校验这个 story-asset-manifest/v2，拒绝未明确风格与负面约束或正文完全重复的提示词，并渲染为按角色、场景和资产子分类聚合、默认中文且可切换英文的单文件 HTML 报告。"

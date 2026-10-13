@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>__REPORT_TITLE__</title>
+  <style>
+__REPORT_STYLES__
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="page-header__inner">
+      <p class="eyebrow">STORY ASSET PROMPT LIBRARY</p>
+      <h1 id="report-title"></h1>
+      <p id="report-summary" class="page-summary"></p>
+    </div>
+  </header>
+  <main id="app" class="app-shell"></main>
+  <div id="copy-status" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <noscript><p class="noscript">此报告需要启用 JavaScript 才能显示分类内容和复制按钮。</p></noscript>
+  <script id="report-data" type="application/json">__REPORT_DATA__</script>
+  <script>
+__REPORT_SCRIPT__
+  </script>
+</body>
+</html>

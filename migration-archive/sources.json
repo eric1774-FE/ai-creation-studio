@@ -1,0 +1,72 @@
+{
+  "schema_version": "skill-migration-archive/v1",
+  "created_at": "2026-10-13",
+  "sources": [
+    {
+      "id": "codex-story-script",
+      "path": "/Users/a0000/.codex/skills/story-script",
+      "archive_path": "skills/codex/story-script",
+      "scope": "story adaptation and episodic scripts"
+    },
+    {
+      "id": "codex-humanizer-zh",
+      "path": "/Users/a0000/.codex/skills/humanizer-zh",
+      "archive_path": "skills/codex/humanizer-zh",
+      "scope": "Chinese humanization editing"
+    },
+    {
+      "id": "codex-picture-book-generator",
+      "path": "/Users/a0000/.codex/skills/picture-book-generator",
+      "archive_path": "skills/codex/picture-book-generator",
+      "scope": "picture book creation"
+    },
+    {
+      "id": "agents-story-asset-prompt-extractor",
+      "path": "/Users/a0000/.agents/skills/story-asset-prompt-extractor",
+      "archive_path": "skills/agents/story-asset-prompt-extractor",
+      "scope": "fixed assets and bilingual prompts"
+    },
+    {
+      "id": "agents-story-prompt-report-renderer",
+      "path": "/Users/a0000/.agents/skills/story-prompt-report-renderer",
+      "archive_path": "skills/agents/story-prompt-report-renderer",
+      "scope": "offline asset prompt reports"
+    },
+    {
+      "id": "agents-nuyoah-image-reverse-prompt",
+      "path": "/Users/a0000/.agents/skills/nuyoah-image-reverse-prompt",
+      "archive_path": "skills/agents/nuyoah-image-reverse-prompt",
+      "scope": "reference image analysis and reverse prompting"
+    },
+    {
+      "id": "claude-shotlist-builder",
+      "path": "/Users/a0000/.claude/skills/shotlist-builder",
+      "archive_path": "skills/claude/shotlist-builder",
+      "scope": "shot design and video prompts"
+    },
+    {
+      "id": "project-picture-book-generator",
+      "path": "/Users/a0000/project/抖音制作/.agents/skills/picture-book-generator",
+      "archive_path": "skills/project/picture-book-generator",
+      "scope": "project-level picture book creation"
+    },
+    {
+      "id": "project-picturebook-micro-video",
+      "path": "/Users/a0000/project/抖音制作/.agents/skills/picturebook-micro-video",
+      "archive_path": "skills/project/picturebook-micro-video",
+      "scope": "picture book micro-motion prompts"
+    },
+    {
+      "id": "project-pixar-prompt-generator",
+      "path": "/Users/a0000/project/抖音制作/.agents/skills/pixar-prompt-generator",
+      "archive_path": "skills/project/pixar-prompt-generator",
+      "scope": "Pixar-style asset prompts"
+    },
+    {
+      "id": "drama-plugin",
+      "path": "/Users/a0000/.codex/plugins/cache/personal/drama/0.2.0+codex.20260830150552",
+      "archive_path": "plugins/drama",
+      "scope": "drama expansion, retention, assets, storyboards and orchestration"
+    }
+  ]
+}

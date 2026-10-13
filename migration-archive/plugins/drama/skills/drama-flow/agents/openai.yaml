@@ -1,0 +1,4 @@
+interface:
+  display_name: "漫剧全流程"
+  short_description: "串联扩写、场景定场资产、阶段报告、分镜与生产包"
+  default_prompt: "使用 $drama-flow 将故事完成扩写、高留存、固定资产与资产报告、生产分镜和无变量生产包。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "电影漫剧资产提示词 V2"
+  short_description: "提取电影漫剧资产，输出中英双语 Manifest V2"
+  default_prompt: "使用 $story-asset-prompt-extractor 从这个故事提取电影与漫剧视觉、声音资产；先确定媒介与风格，再按角色和场景归属资源，合并相同生产资产、明确区分不同状态或用途，并生成每条都含风格与负面约束的中英双语 story-asset-manifest/v2，交付前完成结构校验。"

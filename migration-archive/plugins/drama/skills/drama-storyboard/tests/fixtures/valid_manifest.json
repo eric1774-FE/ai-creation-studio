@@ -1,0 +1,300 @@
+{
+  "schema_version": "storyboard-manifest/v1",
+  "project": {
+    "project_id": "PROJECT_SECRET",
+    "title": "秘密",
+    "language": "zh-CN",
+    "aspect_ratio": "9:16",
+    "target_duration_s": 6,
+    "visual_style": "低饱和二维悬疑漫剧",
+    "generation_path": "i2v_start",
+    "chat_page_size": 10,
+    "capabilities": {
+      "supports_input_image": true,
+      "supports_end_frame": false,
+      "supports_video_extend": false,
+      "profile_note": "通用首帧生视频能力配置"
+    }
+  },
+  "workflow": {
+    "phase_status": "compiled",
+    "source_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "source_label": "抽象独白测试",
+    "skeleton_revision": 1,
+    "approved_revision": 1,
+    "compiled_from_revision": 1
+  },
+  "entities": [
+    {
+      "entity_id": "CHAR_SHENLING",
+      "entity_type": "character",
+      "name": "沈凌",
+      "ref_tag": "{{CHAR_SHENLING}}",
+      "description": "二十七岁男性，短黑发，神情克制",
+      "asset_refs": [],
+      "variants": [
+        {
+          "variant_id": "VAR_SHENLING_BLACK_COAT",
+          "name": "雨夜黑衣造型",
+          "ref_tag": "{{CHAR_SHENLING_BLACK_COAT}}",
+          "description": "黑色长风衣，衣肩有雨水",
+          "asset_refs": []
+        }
+      ]
+    },
+    {
+      "entity_id": "LOC_GRAVEYARD",
+      "entity_type": "location",
+      "name": "山间墓园",
+      "ref_tag": "{{LOC_GRAVEYARD}}",
+      "description": "雨夜中的山间墓园，石阶湿润",
+      "asset_refs": [],
+      "variants": []
+    },
+    {
+      "entity_id": "PROP_CANDLE",
+      "entity_type": "prop",
+      "name": "白色蜡烛",
+      "ref_tag": "{{PROP_CANDLE}}",
+      "description": "燃烧到一半的白色蜡烛",
+      "asset_refs": [],
+      "variants": []
+    }
+  ],
+  "scenes": [
+    {
+      "scene_id": "SCENE_GRAVEYARD_NIGHT",
+      "location_entity_id": "LOC_GRAVEYARD",
+      "summary": "沈凌在雨夜墓园熄灭烛火",
+      "time_of_day": "深夜",
+      "weather": "小雨",
+      "axis": {
+        "line_description": "沈凌与墓碑形成纵向轴线",
+        "camera_side": "side_a"
+      },
+      "lighting": {
+        "key_direction_world": "墓碑左后方四十五度，高于人物视线",
+        "color_temperature_k": 4300,
+        "quality": "soft",
+        "ambient": "冷蓝月光与微弱烛光"
+      },
+      "spatial_relations": [
+        "沈凌位于墓碑前方半米",
+        "蜡烛位于墓碑左下方"
+      ]
+    }
+  ],
+  "shots": [
+    {
+      "shot_id": "SHOT_001",
+      "scene_id": "SCENE_GRAVEYARD_NIGHT",
+      "order": 1,
+      "source_text": "有些秘密，注定要带进坟墓",
+      "duration_s": 3,
+      "purpose": "用人物与墓碑的空间关系建立秘密将被埋藏的意象",
+      "generation_mode": "i2v_start",
+      "entity_refs": [
+        {
+          "entity_id": "CHAR_SHENLING",
+          "variant_id": "VAR_SHENLING_BLACK_COAT",
+          "role": "primary"
+        },
+        {
+          "entity_id": "PROP_CANDLE",
+          "variant_id": null,
+          "role": "prop"
+        }
+      ],
+      "composition": {
+        "shot_size": "medium",
+        "camera_angle": "eye_level",
+        "pov": "objective",
+        "azimuth_deg": 0,
+        "subject_layout": "沈凌居中偏右，墓碑与蜡烛位于左侧前景",
+        "depth_of_field": "medium"
+      },
+      "camera": {
+        "movement": "slow_push_in",
+        "speed": "slow",
+        "focus_operation": "fixed_focus",
+        "bilingual_label": "缓慢推近 (Slow Push In)",
+        "start_frame": "中景交代人物与墓碑",
+        "end_frame": "推近至人物手部和烛火"
+      },
+      "motion": {
+        "primary_action_goal": "沈凌把手伸向烛火但尚未熄灭",
+        "complex_action_subjects": 1,
+        "motion_bounds": {
+          "start_state": {
+            "frame_zone": "right",
+            "body_pose": "站在墓碑前，肩膀微垂",
+            "facing": "侧身面向屏幕左侧的墓碑",
+            "center_of_gravity": "双脚平均承重",
+            "hand_prop_state": "右手垂在身侧，尚未接触蜡烛",
+            "world_vector": "static",
+            "screen_vector": "static",
+            "summary": "人物静立，注视烛火"
+          },
+          "end_state": {
+            "frame_zone": "right",
+            "body_pose": "上身微微前倾",
+            "facing": "侧身面向屏幕左侧的墓碑",
+            "center_of_gravity": "重心轻微前移",
+            "hand_prop_state": "右手停在烛火上方",
+            "world_vector": "static",
+            "screen_vector": "static",
+            "summary": "手指靠近烛火，动作停在熄灭前"
+          }
+        },
+        "motion_beats": [
+          {
+            "order": 1,
+            "description": "沈凌缓慢抬起右手"
+          },
+          {
+            "order": 2,
+            "description": "手指停在烛火上方"
+          }
+        ]
+      },
+      "audio": {
+        "voiceover": "有些秘密，注定要带进坟墓。",
+        "dialogue": [],
+        "ambience": ["细雨落在石阶上的声音"],
+        "sfx": ["风吹动风衣下摆"],
+        "music_intent": "低频持续音，保持克制"
+      },
+      "continuity": {
+        "previous_shot_id": null,
+        "axis_crossing": false,
+        "axis_strategy": "none",
+        "entry_exit": "人物始终留在画面右侧",
+        "eyeline": "看向左下方烛火",
+        "action_match": "下一镜从手指接近烛火继续",
+        "wardrobe_state": "黑色风衣湿润，衣领闭合",
+        "prop_state": "蜡烛点燃，火焰稳定",
+        "lighting_override": null,
+        "cut_type": "standard"
+      },
+      "visual_inference": {
+        "is_inference": true,
+        "additions": ["雨夜墓园", "墓碑前的蜡烛", "人物伸手靠近烛火"],
+        "rationale": "把孤立抽象独白转换为可见意象，新增内容不视为原文事实"
+      },
+      "prompt_layers": {
+        "keyframe_prompt": "{{CHAR_SHENLING_BLACK_COAT}}站在{{LOC_GRAVEYARD}}的墓碑前，{{PROP_CANDLE}}位于左侧前景，人物居中偏右，黑色风衣被细雨打湿，中景，主光位于墓碑左后方四十五度，高于人物视线，4300K柔光，中等景深，低饱和二维悬疑漫剧。",
+        "motion_prompt": "{{CHAR_SHENLING_BLACK_COAT}}缓慢抬起右手并停在{{PROP_CANDLE}}上方，重心轻微前移；镜头缓慢推近 (Slow Push In)，从中景推进至手部与烛火，动作克制，无突然加速；保持墓碑左后方四十五度，高于人物视线的4300K主光。",
+        "end_keyframe_prompt": null,
+        "delivery_prompt": "{{CHAR_SHENLING_BLACK_COAT}}站在{{LOC_GRAVEYARD}}的墓碑前，{{PROP_CANDLE}}位于左侧前景；人物缓慢抬起右手并停在烛火上方，镜头缓慢推近 (Slow Push In)，保持墓碑左后方四十五度，高于人物视线的4300K柔和主光与冷蓝环境光。",
+        "negative_constraints": ["无字幕", "无口型对白", "不改变服装", "不移动墓碑位置", "不改变主光方向"]
+      },
+      "risk_flags": ["visual_inference"]
+    },
+    {
+      "shot_id": "SHOT_002",
+      "scene_id": "SCENE_GRAVEYARD_NIGHT",
+      "order": 2,
+      "source_text": "有些秘密，注定要带进坟墓",
+      "duration_s": 3,
+      "purpose": "以熄灭烛火完成视觉收束",
+      "generation_mode": "i2v_start",
+      "entity_refs": [
+        {
+          "entity_id": "CHAR_SHENLING",
+          "variant_id": "VAR_SHENLING_BLACK_COAT",
+          "role": "primary"
+        },
+        {
+          "entity_id": "PROP_CANDLE",
+          "variant_id": null,
+          "role": "prop"
+        }
+      ],
+      "composition": {
+        "shot_size": "close_up",
+        "camera_angle": "eye_level",
+        "pov": "objective",
+        "azimuth_deg": 40,
+        "subject_layout": "手指和烛火占据画面中心，人物下半张脸位于右上方",
+        "depth_of_field": "shallow"
+      },
+      "camera": {
+        "movement": "fixed",
+        "speed": "static",
+        "focus_operation": "fixed_focus",
+        "bilingual_label": "固定镜头 (Locked-off Shot)",
+        "start_frame": "手指停在烛火上方",
+        "end_frame": "烛火熄灭，烟丝升起"
+      },
+      "motion": {
+        "primary_action_goal": "沈凌用手指熄灭烛火",
+        "complex_action_subjects": 1,
+        "motion_bounds": {
+          "start_state": {
+            "frame_zone": "center",
+            "body_pose": "上身微微前倾",
+            "facing": "面向左下方烛火",
+            "center_of_gravity": "重心轻微前移",
+            "hand_prop_state": "右手停在燃烧的烛火上方",
+            "world_vector": "static",
+            "screen_vector": "static",
+            "summary": "手指靠近尚未熄灭的烛火"
+          },
+          "end_state": {
+            "frame_zone": "center",
+            "body_pose": "上身保持前倾",
+            "facing": "面向左下方蜡烛",
+            "center_of_gravity": "重心稳定",
+            "hand_prop_state": "右手掠过烛芯，火焰熄灭",
+            "world_vector": "static",
+            "screen_vector": "static",
+            "summary": "烛火熄灭，细烟垂直升起"
+          }
+        },
+        "motion_beats": [
+          {
+            "order": 1,
+            "description": "手指快速掠过烛芯"
+          },
+          {
+            "order": 2,
+            "description": "火焰熄灭，细烟升起"
+          }
+        ]
+      },
+      "audio": {
+        "voiceover": null,
+        "dialogue": [],
+        "ambience": ["持续细雨声"],
+        "sfx": ["烛火熄灭的轻响"],
+        "music_intent": "在火焰熄灭时停止低频持续音"
+      },
+      "continuity": {
+        "previous_shot_id": "SHOT_001",
+        "axis_crossing": false,
+        "axis_strategy": "none",
+        "entry_exit": "手部从上一镜右侧延续到画面中心",
+        "eyeline": "人物继续看向左下方",
+        "action_match": "承接上一镜手指停在烛火上方的结束状态",
+        "wardrobe_state": "黑色风衣湿润，衣领闭合",
+        "prop_state": "开场蜡烛点燃，结束时火焰熄灭",
+        "lighting_override": null,
+        "cut_type": "standard"
+      },
+      "visual_inference": {
+        "is_inference": true,
+        "additions": ["人物熄灭烛火", "熄灭后的细烟"],
+        "rationale": "延续上一镜已标记的视觉意象"
+      },
+      "prompt_layers": {
+        "keyframe_prompt": "{{CHAR_SHENLING_BLACK_COAT}}的右手停在{{PROP_CANDLE}}火焰上方，背景为虚化的{{LOC_GRAVEYARD}}，手指和烛火居中，人物下半张脸位于右上方，近景特写，主光位于墓碑左后方四十五度，高于人物视线，4300K柔光，浅景深，低饱和二维悬疑漫剧。",
+        "motion_prompt": "{{CHAR_SHENLING_BLACK_COAT}}的手指快速掠过{{PROP_CANDLE}}烛芯，火焰立即熄灭，细烟垂直升起；固定镜头 (Locked-off Shot)，不跟随手部，不改变构图；保持墓碑左后方四十五度，高于人物视线的4300K主光。",
+        "end_keyframe_prompt": null,
+        "delivery_prompt": "{{CHAR_SHENLING_BLACK_COAT}}的右手在{{LOC_GRAVEYARD}}中掠过{{PROP_CANDLE}}的烛芯，火焰熄灭并升起细烟；固定镜头 (Locked-off Shot)，保持墓碑左后方四十五度，高于人物视线的4300K柔和主光和浅景深。",
+        "negative_constraints": ["无字幕", "无口型对白", "不重新点燃蜡烛", "不改变主光方向", "不增加其他人物"]
+      },
+      "risk_flags": ["visual_inference"]
+    }
+  ],
+  "extensions": {}
+}

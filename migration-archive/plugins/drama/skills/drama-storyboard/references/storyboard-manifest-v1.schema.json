@@ -1,0 +1,887 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:storyboard-manifest:v1",
+  "title": "storyboard-manifest/v1",
+  "description": "Model-agnostic production storyboard manifest for Chinese manju workflows.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project",
+    "workflow",
+    "entities",
+    "scenes",
+    "shots"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "storyboard-manifest/v1"
+    },
+    "project": {
+      "$ref": "#/$defs/project"
+    },
+    "workflow": {
+      "$ref": "#/$defs/workflow"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entity"
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/scene"
+      }
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/shot"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_-]*$"
+    },
+    "refTag": {
+      "type": "string",
+      "pattern": "^\\{\\{[A-Z][A-Z0-9_]*\\}\\}$"
+    },
+    "nullableString": {
+      "type": ["string", "null"]
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "project_id",
+        "title",
+        "language",
+        "aspect_ratio",
+        "target_duration_s",
+        "visual_style",
+        "generation_path",
+        "capabilities"
+      ],
+      "properties": {
+        "project_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "minLength": 2
+        },
+        "aspect_ratio": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*:[1-9][0-9]*$"
+        },
+        "target_duration_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "visual_style": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_path": {
+          "enum": [
+            "t2v",
+            "i2v_start",
+            "i2v_start_end",
+            "video_extend",
+            "mixed"
+          ]
+        },
+        "chat_page_size": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 10
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "supports_input_image",
+            "supports_end_frame",
+            "supports_video_extend"
+          ],
+          "properties": {
+            "supports_input_image": {
+              "type": "boolean"
+            },
+            "supports_end_frame": {
+              "type": "boolean"
+            },
+            "supports_video_extend": {
+              "type": "boolean"
+            },
+            "profile_note": {
+              "$ref": "#/$defs/nullableString"
+            }
+          }
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase_status",
+        "source_digest",
+        "skeleton_revision",
+        "approved_revision",
+        "compiled_from_revision"
+      ],
+      "properties": {
+        "phase_status": {
+          "enum": [
+            "draft_skeleton",
+            "approved_skeleton",
+            "compiled"
+          ]
+        },
+        "source_digest": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "source_label": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "skeleton_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "approved_revision": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        },
+        "compiled_from_revision": {
+          "type": ["integer", "null"],
+          "minimum": 1
+        }
+      }
+    },
+    "assetReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_id", "role", "uri"],
+      "properties": {
+        "asset_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "role": {
+          "enum": [
+            "identity",
+            "appearance",
+            "location",
+            "prop",
+            "style",
+            "start_frame",
+            "end_frame"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "entityVariant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "variant_id",
+        "name",
+        "ref_tag",
+        "description",
+        "asset_refs"
+      ],
+      "properties": {
+        "variant_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref_tag": {
+          "$ref": "#/$defs/refTag"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assetReference"
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "entity_id",
+        "entity_type",
+        "name",
+        "ref_tag",
+        "description",
+        "asset_refs",
+        "variants"
+      ],
+      "properties": {
+        "entity_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "entity_type": {
+          "enum": ["character", "location", "prop"]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ref_tag": {
+          "$ref": "#/$defs/refTag"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/assetReference"
+          }
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityVariant"
+          }
+        }
+      }
+    },
+    "sceneAxis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["line_description", "camera_side"],
+      "properties": {
+        "line_description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "camera_side": {
+          "enum": ["side_a", "side_b", "neutral", "unset"]
+        }
+      }
+    },
+    "lightingAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key_direction_world",
+        "color_temperature_k",
+        "quality",
+        "ambient"
+      ],
+      "properties": {
+        "key_direction_world": {
+          "type": "string",
+          "minLength": 1
+        },
+        "color_temperature_k": {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 20000
+        },
+        "quality": {
+          "enum": ["hard", "soft", "mixed"]
+        },
+        "ambient": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "lightingOverride": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason", "anchor"],
+      "properties": {
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "anchor": {
+          "$ref": "#/$defs/lightingAnchor"
+        }
+      }
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scene_id",
+        "location_entity_id",
+        "summary",
+        "time_of_day",
+        "weather",
+        "axis",
+        "lighting",
+        "spatial_relations"
+      ],
+      "properties": {
+        "scene_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "location_entity_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "time_of_day": {
+          "type": "string",
+          "minLength": 1
+        },
+        "weather": {
+          "type": "string",
+          "minLength": 1
+        },
+        "axis": {
+          "$ref": "#/$defs/sceneAxis"
+        },
+        "lighting": {
+          "$ref": "#/$defs/lightingAnchor"
+        },
+        "spatial_relations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "entityUse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity_id", "variant_id", "role"],
+      "properties": {
+        "entity_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "variant_id": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z][A-Z0-9_-]*$"
+        },
+        "role": {
+          "enum": ["primary", "secondary", "background", "prop"]
+        }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shot_size",
+        "camera_angle",
+        "pov",
+        "azimuth_deg",
+        "subject_layout",
+        "depth_of_field"
+      ],
+      "properties": {
+        "shot_size": {
+          "enum": [
+            "extreme_wide",
+            "wide",
+            "full",
+            "medium_full",
+            "medium",
+            "medium_close",
+            "close_up",
+            "extreme_close_up"
+          ]
+        },
+        "camera_angle": {
+          "enum": [
+            "eye_level",
+            "high_angle",
+            "low_angle",
+            "overhead",
+            "ground_level",
+            "dutch"
+          ]
+        },
+        "pov": {
+          "enum": ["objective", "subjective", "over_shoulder"]
+        },
+        "azimuth_deg": {
+          "type": "number",
+          "minimum": 0,
+          "exclusiveMaximum": 360
+        },
+        "subject_layout": {
+          "type": "string",
+          "minLength": 1
+        },
+        "depth_of_field": {
+          "enum": ["deep", "medium", "shallow"]
+        }
+      }
+    },
+    "camera": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "movement",
+        "speed",
+        "focus_operation",
+        "bilingual_label",
+        "start_frame",
+        "end_frame"
+      ],
+      "properties": {
+        "movement": {
+          "enum": [
+            "fixed",
+            "slow_push_in",
+            "fast_push_in",
+            "dolly_out",
+            "pan_left",
+            "pan_right",
+            "tilt_up",
+            "tilt_down",
+            "tracking_left",
+            "tracking_right",
+            "follow",
+            "orbit_left",
+            "orbit_right",
+            "handheld",
+            "crane_up",
+            "crane_down",
+            "zoom_in",
+            "zoom_out"
+          ]
+        },
+        "speed": {
+          "enum": ["static", "slow", "normal", "fast", "accelerating", "decelerating"]
+        },
+        "focus_operation": {
+          "enum": ["fixed_focus", "rack_near_to_far", "rack_far_to_near"]
+        },
+        "bilingual_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start_frame": {
+          "type": "string",
+          "minLength": 1
+        },
+        "end_frame": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "motionState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "frame_zone",
+        "body_pose",
+        "facing",
+        "center_of_gravity",
+        "hand_prop_state",
+        "world_vector",
+        "screen_vector",
+        "summary"
+      ],
+      "properties": {
+        "frame_zone": {
+          "enum": [
+            "far_left",
+            "left",
+            "center",
+            "right",
+            "far_right",
+            "foreground",
+            "midground",
+            "background",
+            "offscreen"
+          ]
+        },
+        "body_pose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "facing": {
+          "type": "string",
+          "minLength": 1
+        },
+        "center_of_gravity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "hand_prop_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "world_vector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "screen_vector": {
+          "enum": [
+            "left_to_right",
+            "right_to_left",
+            "toward_camera",
+            "away_from_camera",
+            "static",
+            "mixed"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "motionBeat": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["order", "description"],
+      "properties": {
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_action_goal",
+        "complex_action_subjects",
+        "motion_bounds",
+        "motion_beats"
+      ],
+      "properties": {
+        "primary_action_goal": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complex_action_subjects": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "motion_bounds": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start_state", "end_state"],
+          "properties": {
+            "start_state": {
+              "$ref": "#/$defs/motionState"
+            },
+            "end_state": {
+              "$ref": "#/$defs/motionState"
+            }
+          }
+        },
+        "motion_beats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/motionBeat"
+          }
+        }
+      }
+    },
+    "dialogueLine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["speaker_entity_id", "text"],
+      "properties": {
+        "speaker_entity_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["voiceover", "dialogue", "ambience", "sfx", "music_intent"],
+      "properties": {
+        "voiceover": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "dialogue": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialogueLine"
+          }
+        },
+        "ambience": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sfx": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "music_intent": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "previous_shot_id",
+        "axis_crossing",
+        "axis_strategy",
+        "entry_exit",
+        "eyeline",
+        "action_match",
+        "wardrobe_state",
+        "prop_state",
+        "lighting_override",
+        "cut_type"
+      ],
+      "properties": {
+        "previous_shot_id": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Z][A-Z0-9_-]*$"
+        },
+        "axis_crossing": {
+          "type": "boolean"
+        },
+        "axis_strategy": {
+          "enum": ["none", "neutral_shot", "visible_cross", "reestablish", "intentional_break"]
+        },
+        "entry_exit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eyeline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "action_match": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wardrobe_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prop_state": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lighting_override": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/lightingOverride"
+            }
+          ]
+        },
+        "cut_type": {
+          "enum": [
+            "standard",
+            "jump_cut",
+            "match_cut",
+            "impact_cut",
+            "montage",
+            "dissolve",
+            "fade",
+            "whip_pan"
+          ]
+        }
+      }
+    },
+    "visualInference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["is_inference", "additions", "rationale"],
+      "properties": {
+        "is_inference": {
+          "type": "boolean"
+        },
+        "additions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rationale": {
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "promptLayers": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "keyframe_prompt",
+        "motion_prompt",
+        "end_keyframe_prompt",
+        "delivery_prompt",
+        "negative_constraints"
+      ],
+      "properties": {
+        "keyframe_prompt": {
+          "type": "string"
+        },
+        "motion_prompt": {
+          "type": "string"
+        },
+        "end_keyframe_prompt": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "delivery_prompt": {
+          "type": "string"
+        },
+        "negative_constraints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "shot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "shot_id",
+        "scene_id",
+        "order",
+        "source_text",
+        "duration_s",
+        "purpose",
+        "generation_mode",
+        "entity_refs",
+        "composition",
+        "camera",
+        "motion",
+        "audio",
+        "continuity",
+        "visual_inference",
+        "prompt_layers",
+        "risk_flags"
+      ],
+      "properties": {
+        "shot_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "scene_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "duration_s": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_mode": {
+          "enum": ["t2v", "i2v_start", "i2v_start_end", "video_extend"]
+        },
+        "entity_refs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/entityUse"
+          }
+        },
+        "composition": {
+          "$ref": "#/$defs/composition"
+        },
+        "camera": {
+          "$ref": "#/$defs/camera"
+        },
+        "motion": {
+          "$ref": "#/$defs/motion"
+        },
+        "audio": {
+          "$ref": "#/$defs/audio"
+        },
+        "continuity": {
+          "$ref": "#/$defs/continuity"
+        },
+        "visual_inference": {
+          "$ref": "#/$defs/visualInference"
+        },
+        "prompt_layers": {
+          "$ref": "#/$defs/promptLayers"
+        },
+        "risk_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "multi_subject",
+              "action_overload",
+              "continuity_risk",
+              "lighting_override",
+              "visual_inference",
+              "end_frame_required",
+              "model_capability_unverified"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
