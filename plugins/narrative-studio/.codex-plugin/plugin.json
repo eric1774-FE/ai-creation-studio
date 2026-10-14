@@ -1,15 +1,15 @@
 {
   "name": "narrative-studio",
   "version": "0.1.0",
-  "description": "中文故事、剧本、分镜、固定资产与绘本创作工作流",
+  "description": "2–6 岁儿童双语英语启蒙动画的故事策划插件",
   "author": {
     "name": "Local"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "叙事工坊",
-    "shortDescription": "从故事创作到分镜和制作资料",
-    "longDescription": "面向短剧、漫剧与绘本创作，提供故事开发与审核、改编、分集剧本、分镜、固定资产、AI 提示词和离线报告。只产出文本与提示词，不直接生成媒体。",
+    "shortDescription": "少儿双语动画故事策划",
+    "longDescription": "根据教学词汇、角色、平台与节奏模式，匹配八大反差戏剧母题，输出教学动作与动态故事节拍。每条故事最多一个场景、两个角色、一个核心道具；不生成分镜或媒体。",
     "developerName": "Local",
     "category": "Productivity",
     "capabilities": [
@@ -17,11 +17,7 @@
       "Write"
     ],
     "defaultPrompt": [
-      "把这篇小说整理成事件表、故事骨架和分集短剧剧本。",
-      "检查这一集剧本的因果、人物动机和结尾钩子，输出可执行的审核意见。",
-      "把已确认的剧本片段拆成有动作连续性的导演分镜和视频提示词。",
-      "从故事中整理角色、服装、场景和道具资产；若项目尚无风格，先让我选择。",
-      "把这个主题规划成逐页绘本，并附插画与微动作视频提示词。"
+      "用 Jump 为小恐龙 Pip 和小柴犬 Toby 策划一条双语启蒙动画，pacing_mode 使用 auto。"
     ]
   }
 }
