@@ -25,7 +25,9 @@ flowchart TD
 
 四个技能分别手动调用，交接时保留完整上游 Markdown。在同一对话中可沿用上下文；切换对话时需粘贴完整上游输出。所有技能只交付文字，不自动调用其他技能或外部绘图、视频模型 API；图片、视频生成及剪辑由后续制作环节执行。
 
-## 安装
+## 安装与环境支持
+
+### OpenAI Codex
 
 使用支持插件的 Codex，并确保终端可执行 `codex`。在仓库根目录执行：
 
@@ -36,7 +38,14 @@ codex plugin add narrative-studio --marketplace ai-creation-studio
 
 本地市场由 [.agents/plugins/marketplace.json](.agents/plugins/marketplace.json) 定义，插件清单位于 [plugin.json](plugins/narrative-studio/.codex-plugin/plugin.json)，四个技能通过 `"skills": "./skills/"` 入口发现。本地市场与项目启用机制可参考 [OpenAI 官方插件文档](https://developers.openai.com/plugins/build/plugins#enable-or-disable-a-plugin-for-a-repo)。
 
-安装并加载插件后，在新对话中按下面的顺序使用。仅运行本地校验脚本和回归测试时，需要 Python 3，无第三方包依赖。
+### Google Antigravity / Gemini
+
+本项目原生支持 Google Antigravity，无需手动注册插件市场：
+
+- 技能发现：通过 [.agents/skills.json](.agents/skills.json) 声明技能检索路径，自动注册 4 个专业技能，随工作区开箱即用。
+- 规则与自主校验：项目根目录配置了通用的 [AGENTS.md](AGENTS.md)，指导 Agent 遵循四阶段流水线规范，并在生成分镜与提示词时自动运行 Python 校验器闭环修复，确保格式与时间轴零瑕疵。
+
+安装并加载后，在新对话中按下面的顺序使用。仅运行本地校验脚本和回归测试时，需要 Python 3，无第三方包依赖。
 
 ## 使用示例
 
