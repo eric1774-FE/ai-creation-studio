@@ -1,4 +1,0 @@
-interface:
-  display_name: "漫剧生产分镜"
-  short_description: "将中文文案拆成连续分镜，绑定资产并导出HTML生产包"
-  default_prompt: "使用 $drama-storyboard 将文本整理为生产级漫剧分镜；确认骨架后绑定固定资产，导出无变量HTML报告和生产包。"

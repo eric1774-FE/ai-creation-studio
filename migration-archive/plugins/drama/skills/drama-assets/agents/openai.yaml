@@ -1,4 +1,0 @@
-interface:
-  display_name: "漫剧固定资产"
-  short_description: "生成角色、场景全景与九宫格机位资产及HTML报告"
-  default_prompt: "使用 $drama-assets 从故事中提取核心固定资产，先让我确认清单，再生成所选图片和离线资产HTML报告。"

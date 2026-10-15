@@ -1,7 +1,0 @@
-interface:
-  display_name: "漫剧画面扩写"
-  short_description: "把直白情绪改写成有画面的叙事表达并拓展联想与细节共鸣"
-  default_prompt: "使用 $drama-expand，把这段文字改写或扩写得更客观、含蓄、有画面感。"
-
-policy:
-  allow_implicit_invocation: true

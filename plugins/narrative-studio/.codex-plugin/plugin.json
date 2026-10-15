@@ -1,15 +1,15 @@
 {
   "name": "narrative-studio",
   "version": "0.1.0",
-  "description": "2–6 岁儿童双语英语启蒙动画的故事策划插件",
+  "description": "2–6 岁儿童双语英语启蒙动画的故事策划、分镜导演、提示词编译与后期装配插件",
   "author": {
     "name": "Local"
   },
   "skills": "./skills/",
   "interface": {
     "displayName": "叙事工坊",
-    "shortDescription": "少儿双语动画故事策划",
-    "longDescription": "根据教学词汇、角色、平台与节奏模式，匹配八大反差戏剧母题，输出教学动作与动态故事节拍。每条故事最多一个场景、两个角色、一个核心道具；不生成分镜或媒体。",
+    "shortDescription": "少儿双语动画故事、分镜、提示词与后期装配",
+    "longDescription": "kids-story-planner 根据教学词汇、角色、平台与节奏模式，匹配八大反差戏剧母题，输出教学动作与动态故事节拍；storyboard-director 接收完整故事大纲，输出导演总览、秒级八列视听分镜表与首尾循环验证；ai-prompt-generator 将完整导演输出编译为全局一致性资产卡、逐镜 T2I/I2V 提示词矩阵与后期音画装配清单，采用 Preset + Adapter、独立 Negative 和 Reference Asset 字段。三个技能分别手动调用，每条故事最多一个场景、两个角色、一个核心道具；仅生成文字，不直接调用外部绘图或视频模型 API，不生成图片或视频。",
     "developerName": "Local",
     "category": "Productivity",
     "capabilities": [
