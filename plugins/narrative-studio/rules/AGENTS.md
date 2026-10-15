@@ -1,0 +1,1 @@
+/Users/a0000/project/ai-creation-studio/AGENTS.md
